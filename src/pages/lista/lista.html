@@ -1,0 +1,39 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>lista</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let pic of pictureList">
+      <ion-item> 
+      	  <ion-card>
+		    <img src="{{ pic.url }}"/>
+		    <ion-card-content>
+		      <ion-card-title>
+		        Valoración : {{ pic.tipo }}
+		      </ion-card-title>
+		      <p>
+		        Autor : {{ pic.usrName }}
+		      </p>
+		      <p>
+		        <ion-icon name="logo-twitter" item-start></ion-icon>
+                Seguidores
+                <ion-badge item-end>260k</ion-badge>
+		      </p>
+
+		    </ion-card-content>
+         </ion-card>
+
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+
+</ion-content>
