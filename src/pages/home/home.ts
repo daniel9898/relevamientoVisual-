@@ -30,21 +30,25 @@ export class HomePage {
   }
 
 
-  tomarImagen(tipo : string) {
+  async tomarImagen(tipo : string) {
 
-    let base64Image = 'data:image/jpeg;base64,';
+    try{
 
-    this.camera.getPicture(this.options).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,';
+      let imageData = await this.camera.getPicture(this.options); 
+         
+      this.utilities.showLoading(true);
+      this.image = base64Image + imageData;
+      this.enviarImagen(tipo);
 
-        this.image = base64Image + imageData;
-        this.enviarImagen(tipo);
-      
-      }).catch((err)=>{
-        console.log("Error en Foto:",err);
-      });
-   }
+    }catch(e){
+       console.log(e.message);
+       this.utilities.showAlert("Atencion!",e.message);
+    }
 
-   async enviarImagen(tipo : string){
+  }
+
+  async enviarImagen(tipo : string){
     
     try{
     	
@@ -56,16 +60,18 @@ export class HomePage {
     	let filePath = uploadOk.metadata.fullPath;
     	let fileUrl = await this.firebase.getStorage().storage.ref(filePath).getDownloadURL();
         
-      let data = { url: fileUrl, usrName: usr.nombre, tipo: tipo };
+      let data = { url: fileUrl, usrName: usr.nombre, tipo: tipo, fecha: new Date().toLocaleString()};
       await this.firebase.InsertarConIdAutomatico("archivos",data); 
 
       this.navCtrl.push('ListaPage');
 
     }catch(e){
+
     	console.log(e.message);
-        this.utilities.showAlert("Atencion!",e.message);
+      throw e.message;
+      
     } 
 
-   }
+  }
 
 }

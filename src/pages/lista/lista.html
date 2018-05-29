@@ -2,38 +2,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>lista</ion-title>
+    <ion-title>Imágenes <ion-icon name="aperture"></ion-icon></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="card-background-page">
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let pic of pictureList">
-      <ion-item> 
-      	  <ion-card>
-		    <img src="{{ pic.url }}"/>
-		    <ion-card-content>
-		      <ion-card-title>
-		        Valoración : {{ pic.tipo }}
-		      </ion-card-title>
-		      <p>
-		        Autor : {{ pic.usrName }}
-		      </p>
-		      <p>
-		        <ion-icon name="logo-twitter" item-start></ion-icon>
-                Seguidores
-                <ion-badge item-end>260k</ion-badge>
-		      </p>
-
-		    </ion-card-content>
-         </ion-card>
-
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
-
+  <ion-card *ngFor="let pic of pictureList" >
+    <img src="{{ pic.url }}"/>
+    <div class="card-title">{{ pic.usrName }}</div>
+    <div class="card-subtitle">{{ pic.fecha }}</div>
+    <p class="card-subtitle">
+      Valoración : {{ pic.tipo }}
+    </p>
+  </ion-card>
 
 </ion-content>
