@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController, AlertController, LoadingController } from 'ionic-angular';
 
-
-
 @Injectable()
 export class UtilitiesProvider {
 
